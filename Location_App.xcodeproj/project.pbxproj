@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		ED72A08B23E3149700DE05A2 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED72A08A23E3149700DE05A2 /* AVFoundation.framework */; };
+		ED72A08E23E3154D00DE05A2 /* iphone_notification.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = ED72A08D23E3154D00DE05A2 /* iphone_notification.mp3 */; };
 		ED7928B423E2F736002D3BDD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7928B323E2F736002D3BDD /* AppDelegate.swift */; };
 		ED7928B623E2F736002D3BDD /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7928B523E2F736002D3BDD /* SceneDelegate.swift */; };
 		ED7928B823E2F736002D3BDD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7928B723E2F736002D3BDD /* ViewController.swift */; };
@@ -15,6 +17,11 @@
 		ED7928C023E2F73B002D3BDD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED7928BE23E2F73B002D3BDD /* LaunchScreen.storyboard */; };
 		ED7928CB23E2F73B002D3BDD /* Location_AppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7928CA23E2F73B002D3BDD /* Location_AppTests.swift */; };
 		ED7928D623E2F73B002D3BDD /* Location_AppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7928D523E2F73B002D3BDD /* Location_AppUITests.swift */; };
+		ED7928E523E2F845002D3BDD /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED7928E423E2F845002D3BDD /* CoreLocation.framework */; };
+		ED7928E723E2FA13002D3BDD /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7928E623E2FA13002D3BDD /* LocationService.swift */; };
+		ED7928E923E2FD2A002D3BDD /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7928E823E2FD2A002D3BDD /* Constants.swift */; };
+		EDBDBA9923E422B400756519 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDBDBA9823E422B400756519 /* MapKit.framework */; };
+		EDBDBA9B23E4380800756519 /* TriggerPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDBDBA9A23E4380800756519 /* TriggerPoint.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,6 +42,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		ED72A08A23E3149700DE05A2 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		ED72A08D23E3154D00DE05A2 /* iphone_notification.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = iphone_notification.mp3; sourceTree = "<group>"; };
 		ED7928B023E2F736002D3BDD /* Location_App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Location_App.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED7928B323E2F736002D3BDD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ED7928B523E2F736002D3BDD /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -49,6 +58,11 @@
 		ED7928D123E2F73B002D3BDD /* Location_AppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Location_AppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED7928D523E2F73B002D3BDD /* Location_AppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location_AppUITests.swift; sourceTree = "<group>"; };
 		ED7928D723E2F73B002D3BDD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		ED7928E423E2F845002D3BDD /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		ED7928E623E2FA13002D3BDD /* LocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationService.swift; sourceTree = "<group>"; };
+		ED7928E823E2FD2A002D3BDD /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		EDBDBA9823E422B400756519 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		EDBDBA9A23E4380800756519 /* TriggerPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriggerPoint.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +70,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ED72A08B23E3149700DE05A2 /* AVFoundation.framework in Frameworks */,
+				EDBDBA9923E422B400756519 /* MapKit.framework in Frameworks */,
+				ED7928E523E2F845002D3BDD /* CoreLocation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -76,6 +93,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		ED72A08C23E3152900DE05A2 /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				ED72A08D23E3154D00DE05A2 /* iphone_notification.mp3 */,
+			);
+			path = Sounds;
+			sourceTree = "<group>";
+		};
 		ED7928A723E2F736002D3BDD = {
 			isa = PBXGroup;
 			children = (
@@ -83,6 +108,7 @@
 				ED7928C923E2F73B002D3BDD /* Location_AppTests */,
 				ED7928D423E2F73B002D3BDD /* Location_AppUITests */,
 				ED7928B123E2F736002D3BDD /* Products */,
+				ED7928E323E2F845002D3BDD /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -99,6 +125,10 @@
 		ED7928B223E2F736002D3BDD /* Location_App */ = {
 			isa = PBXGroup;
 			children = (
+				ED7928E823E2FD2A002D3BDD /* Constants.swift */,
+				EDBDBA9C23E4381600756519 /* Annotations */,
+				ED72A08C23E3152900DE05A2 /* Sounds */,
+				ED7928EA23E3054A002D3BDD /* Services */,
 				ED7928B323E2F736002D3BDD /* AppDelegate.swift */,
 				ED7928B523E2F736002D3BDD /* SceneDelegate.swift */,
 				ED7928B723E2F736002D3BDD /* ViewController.swift */,
@@ -126,6 +156,32 @@
 				ED7928D723E2F73B002D3BDD /* Info.plist */,
 			);
 			path = Location_AppUITests;
+			sourceTree = "<group>";
+		};
+		ED7928E323E2F845002D3BDD /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				EDBDBA9823E422B400756519 /* MapKit.framework */,
+				ED72A08A23E3149700DE05A2 /* AVFoundation.framework */,
+				ED7928E423E2F845002D3BDD /* CoreLocation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		ED7928EA23E3054A002D3BDD /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				ED7928E623E2FA13002D3BDD /* LocationService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		EDBDBA9C23E4381600756519 /* Annotations */ = {
+			isa = PBXGroup;
+			children = (
+				EDBDBA9A23E4380800756519 /* TriggerPoint.swift */,
+			);
+			path = Annotations;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -234,6 +290,7 @@
 			files = (
 				ED7928C023E2F73B002D3BDD /* LaunchScreen.storyboard in Resources */,
 				ED7928BD23E2F73B002D3BDD /* Assets.xcassets in Resources */,
+				ED72A08E23E3154D00DE05A2 /* iphone_notification.mp3 in Resources */,
 				ED7928BB23E2F736002D3BDD /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -259,8 +316,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ED7928E923E2FD2A002D3BDD /* Constants.swift in Sources */,
 				ED7928B823E2F736002D3BDD /* ViewController.swift in Sources */,
 				ED7928B423E2F736002D3BDD /* AppDelegate.swift in Sources */,
+				EDBDBA9B23E4380800756519 /* TriggerPoint.swift in Sources */,
+				ED7928E723E2FA13002D3BDD /* LocationService.swift in Sources */,
 				ED7928B623E2F736002D3BDD /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
