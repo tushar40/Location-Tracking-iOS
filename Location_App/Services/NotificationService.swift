@@ -37,16 +37,16 @@ class NotificationService: NSObject {
     }
     
     func addNotification(radius: Double, region: CLCircularRegion) {
-        let content = UNMutableNotificationContent()
-        content.title = region.identifier
-        content.subtitle = "\(region.center.latitude), \(region.center.longitude)"
-        content.body = "At location: \(region.identifier)"
-        content.sound = UNNotificationSound.default //(named: UNNotificationSoundName(rawValue: "iphone_notification.mp3"))
-        
-        let trigger = UNLocationNotificationTrigger(region: region, repeats: false)
-        
-        let request = UNNotificationRequest(identifier: "\(region.identifier)_notify", content: content, trigger: trigger)
-        
-        notificationCenter.add(request, withCompletionHandler: nil)
+        if permissionGranted {
+            let content = UNMutableNotificationContent()
+            content.title = region.identifier
+            content.subtitle = "\(region.center.latitude), \(region.center.longitude)"
+            content.body = "At location: \(region.identifier)"
+            content.sound = UNNotificationSound.default //(named: UNNotificationSoundName(rawValue: "iphone_notification.mp3"))
+            
+            let trigger = UNLocationNotificationTrigger(region: region, repeats: false)
+            let request = UNNotificationRequest(identifier: "\(region.identifier)_notify", content: content, trigger: trigger)
+            notificationCenter.add(request, withCompletionHandler: nil)
+        }
     }
 }

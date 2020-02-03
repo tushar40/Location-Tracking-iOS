@@ -39,13 +39,28 @@ class ViewController: UIViewController {
             addRoute()
         }
     }
+    
+    //MARK:- IBActions
+    
     @IBAction func startAddingRoute(_ sender: UIBarButtonItem) {
-        recordingOn = true
+        UIView.animate(withDuration: 0.7, animations: {
+            sender.tintColor = .clear
+        }, completion: { [weak self] _ in
+            sender.tintColor = .blue
+            self?.recordingOn = true
+        })
     }
     
     @IBAction func clearRoute(_ sender: Any) {
-        recordingOn = false
-        route = []
+        if let senderButton = sender as? UIBarButtonItem {
+            UIView.animate(withDuration: 0.7, animations: {
+                senderButton.tintColor = .clear
+            }, completion: { [weak self] _ in
+                senderButton.tintColor = .red
+                self?.recordingOn = false
+                self?.route = []
+            })
+        }
     }
     
     //MARK:- Lifecycle Methods
@@ -99,35 +114,6 @@ class ViewController: UIViewController {
         }
     }
     
-    private func addRoute(sourceLocation: CLLocationCoordinate2D, destinationLocation: CLLocationCoordinate2D) {
-        let sourcePlaceMark = MKPlacemark(coordinate: sourceLocation)
-        let destinationPlaceMark = MKPlacemark(coordinate: destinationLocation)
-        
-        let sourceMapItem = MKMapItem(placemark: sourcePlaceMark)
-        let destinationMapItem = MKMapItem(placemark: destinationPlaceMark)
-        
-        let directionRequest = MKDirections.Request()
-        directionRequest.source = sourceMapItem
-        directionRequest.destination = destinationMapItem
-        directionRequest.transportType = .automobile
-        
-        let directions = MKDirections(request: directionRequest)
-        directions.calculate { [weak self] response, error in
-            guard let self = self else { return }
-            guard let response = response else {
-                if let error = error {
-                    print(error)
-                }
-                return
-            }
-            let route = response.routes[0]
-            self.mapView.addOverlay(route.polyline, level: .aboveRoads)
-            
-            let rect = route.polyline.boundingMapRect
-            self.mapView.setRegion(MKCoordinateRegion(rect), animated: true)
-        }
-    }
-    
     private func addRoute() {
         print(route)
         if let currentPolyLine = currentRouteOverlay {
@@ -142,7 +128,7 @@ class ViewController: UIViewController {
         currentRouteOverlay = myPolyLine
         
         let rect = myPolyLine.boundingMapRect
-        self.mapView.setRegion(MKCoordinateRegion(rect), animated: true)
+        mapView.setRegion(MKCoordinateRegion(rect), animated: true)
     }
 }
 
@@ -154,12 +140,8 @@ extension ViewController: LocationServiceDelegate {
         if let atLocation = location {
             let distanceMoved = currentLocation.distance(from: atLocation)
             print(currentLocation.coordinate, atLocation.coordinate)
-            print("distance moved: ",distanceMoved)
-            if distanceMoved > 0.0 && distanceMoved <= Constants.geofencingRadius / 5 {
-//                addRoute(sourceLocation: currentLocation.coordinate, destinationLocation: atLocation.coordinate)
-            }
             currentLocation =  atLocation
-            if distanceMoved > 0.0 && distanceMoved <= Constants.geofencingRadius / 2 {
+            if distanceMoved >= Constants.distanceFilter && distanceMoved <= Constants.geofencingRadius / 4 {
                 if recordingOn {
                     route.append(currentLocation.coordinate)
                 }
@@ -192,7 +174,7 @@ extension ViewController: MKMapViewDelegate {
         } else {
             markerView = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: identifier)
             markerView.canShowCallout = true
-            markerView.calloutOffset = CGPoint(x: -5, y: 5)
+            markerView.calloutOffset = CGPoint(x: 0, y: 10)
             markerView.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
             markerView.glyphText = String((annotation.title?.prefix(1))!)
         }
