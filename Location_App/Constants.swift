@@ -7,12 +7,15 @@
 //
 
 import Foundation
-import CoreLocation
+import CoreLocation.CLLocation
+import UIKit.UIColor
 
 struct Constants {
     
     static let distanceFilter = 1.0
     static let geofencingRadius = 100.0
+    static let routeColor = UIColor.blue
+    static let routeLineWidth: CGFloat = 5.0
 
     struct PointOfInterest {
         static let hotCocoa = CLLocation(latitude: 28.537750, longitude: 77.210376)

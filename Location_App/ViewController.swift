@@ -30,6 +30,23 @@ class ViewController: UIViewController {
     private let coordinateSpan = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
     private let identifier = "Marker"
     private var currentLocation: CLLocation! = Constants.PointOfInterest.hotCocoa
+    private let routeColor = Constants.routeColor
+    private let routeLineWidth = Constants.routeLineWidth
+    private var recordingOn = true
+    private var currentRouteOverlay: MKPolyline?
+    private var route = [CLLocationCoordinate2D](){
+        didSet {
+            addRoute()
+        }
+    }
+    @IBAction func startAddingRoute(_ sender: UIBarButtonItem) {
+        recordingOn = true
+    }
+    
+    @IBAction func clearRoute(_ sender: Any) {
+        recordingOn = false
+        route = []
+    }
     
     //MARK:- Lifecycle Methods
     
@@ -49,6 +66,7 @@ class ViewController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         locationService.stopService()
+        clearRoute(self)
         super.viewWillDisappear(animated)
     }
     
@@ -80,6 +98,52 @@ class ViewController: UIViewController {
             mapView.addAnnotation(marker)
         }
     }
+    
+    private func addRoute(sourceLocation: CLLocationCoordinate2D, destinationLocation: CLLocationCoordinate2D) {
+        let sourcePlaceMark = MKPlacemark(coordinate: sourceLocation)
+        let destinationPlaceMark = MKPlacemark(coordinate: destinationLocation)
+        
+        let sourceMapItem = MKMapItem(placemark: sourcePlaceMark)
+        let destinationMapItem = MKMapItem(placemark: destinationPlaceMark)
+        
+        let directionRequest = MKDirections.Request()
+        directionRequest.source = sourceMapItem
+        directionRequest.destination = destinationMapItem
+        directionRequest.transportType = .automobile
+        
+        let directions = MKDirections(request: directionRequest)
+        directions.calculate { [weak self] response, error in
+            guard let self = self else { return }
+            guard let response = response else {
+                if let error = error {
+                    print(error)
+                }
+                return
+            }
+            let route = response.routes[0]
+            self.mapView.addOverlay(route.polyline, level: .aboveRoads)
+            
+            let rect = route.polyline.boundingMapRect
+            self.mapView.setRegion(MKCoordinateRegion(rect), animated: true)
+        }
+    }
+    
+    private func addRoute() {
+        print(route)
+        if let currentPolyLine = currentRouteOverlay {
+            mapView.removeOverlay(currentPolyLine)
+        }
+        if route.count < 1 {
+            return
+        }
+        
+        let myPolyLine = MKPolyline(coordinates: route, count: route.count)
+        mapView.addOverlay(myPolyLine)
+        currentRouteOverlay = myPolyLine
+        
+        let rect = myPolyLine.boundingMapRect
+        self.mapView.setRegion(MKCoordinateRegion(rect), animated: true)
+    }
 }
 
 //MARK:- LocationServiceDelegate Methods
@@ -88,7 +152,18 @@ extension ViewController: LocationServiceDelegate {
     
     func foundLocation(location: CLLocation?) {
         if let atLocation = location {
+            let distanceMoved = currentLocation.distance(from: atLocation)
+            print(currentLocation.coordinate, atLocation.coordinate)
+            print("distance moved: ",distanceMoved)
+            if distanceMoved > 0.0 && distanceMoved <= Constants.geofencingRadius / 5 {
+//                addRoute(sourceLocation: currentLocation.coordinate, destinationLocation: atLocation.coordinate)
+            }
             currentLocation =  atLocation
+            if distanceMoved > 0.0 && distanceMoved <= Constants.geofencingRadius / 2 {
+                if recordingOn {
+                    route.append(currentLocation.coordinate)
+                }
+            }
         }
     }
     
@@ -122,5 +197,13 @@ extension ViewController: MKMapViewDelegate {
             markerView.glyphText = String((annotation.title?.prefix(1))!)
         }
         return markerView
+    }
+    
+    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+        let renderer = MKPolylineRenderer(overlay: overlay)
+        renderer.strokeColor = routeColor
+        renderer.lineWidth = routeLineWidth
+        
+        return renderer
     }
 }

@@ -20,6 +20,10 @@
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>This app tracks your location, to get you notified about your current location.</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>This app tracks your location, to get you notified about your current location.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>This app tracks your location, to get you notified about your current location.</string>
 	<key>UIApplicationSceneManifest</key>

@@ -20,6 +20,7 @@
 		ED7928E523E2F845002D3BDD /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED7928E423E2F845002D3BDD /* CoreLocation.framework */; };
 		ED7928E723E2FA13002D3BDD /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7928E623E2FA13002D3BDD /* LocationService.swift */; };
 		ED7928E923E2FD2A002D3BDD /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7928E823E2FD2A002D3BDD /* Constants.swift */; };
+		EDADC6AD23E845B20066AE4C /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDADC6AC23E845B20066AE4C /* NotificationService.swift */; };
 		EDBDBA9923E422B400756519 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDBDBA9823E422B400756519 /* MapKit.framework */; };
 		EDBDBA9B23E4380800756519 /* TriggerPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDBDBA9A23E4380800756519 /* TriggerPoint.swift */; };
 /* End PBXBuildFile section */
@@ -61,6 +62,7 @@
 		ED7928E423E2F845002D3BDD /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		ED7928E623E2FA13002D3BDD /* LocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationService.swift; sourceTree = "<group>"; };
 		ED7928E823E2FD2A002D3BDD /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		EDADC6AC23E845B20066AE4C /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		EDBDBA9823E422B400756519 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		EDBDBA9A23E4380800756519 /* TriggerPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriggerPoint.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -172,6 +174,7 @@
 			isa = PBXGroup;
 			children = (
 				ED7928E623E2FA13002D3BDD /* LocationService.swift */,
+				EDADC6AC23E845B20066AE4C /* NotificationService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -318,6 +321,7 @@
 			files = (
 				ED7928E923E2FD2A002D3BDD /* Constants.swift in Sources */,
 				ED7928B823E2F736002D3BDD /* ViewController.swift in Sources */,
+				EDADC6AD23E845B20066AE4C /* NotificationService.swift in Sources */,
 				ED7928B423E2F736002D3BDD /* AppDelegate.swift in Sources */,
 				EDBDBA9B23E4380800756519 /* TriggerPoint.swift in Sources */,
 				ED7928E723E2FA13002D3BDD /* LocationService.swift in Sources */,

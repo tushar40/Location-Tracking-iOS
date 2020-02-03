@@ -16,24 +16,43 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" showsScale="YES" showsTraffic="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PXX-rb-0js">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="841.5"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="820.5"/>
                             </mapView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bui-4f-XiL">
-                                <rect key="frame" x="8" y="841.5" width="398" height="20.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My Location" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bui-4f-XiL">
+                                <rect key="frame" x="8" y="820.5" width="398" height="26.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VuA-JY-Fuv">
+                                <rect key="frame" x="0.0" y="847" width="414" height="49"/>
+                                <items>
+                                    <barButtonItem title="start recording path" id="UJ4-Qb-fHa">
+                                        <connections>
+                                            <action selector="startAddingRoute:" destination="BYZ-38-t0r" id="8o6-Tz-8z3"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="43e-CL-kId"/>
+                                    <barButtonItem title="Clear Recorded Path" id="oiz-yo-7gC">
+                                        <connections>
+                                            <action selector="clearRoute:" destination="BYZ-38-t0r" id="xV1-vX-4Ks"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="Bui-4f-XiL" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="9sk-yl-gbl"/>
+                            <constraint firstItem="Bui-4f-XiL" firstAttribute="top" secondItem="PXX-rb-0js" secondAttribute="bottom" id="0Uq-of-uPy"/>
+                            <constraint firstItem="VuA-JY-Fuv" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="76M-e1-0Z9"/>
+                            <constraint firstItem="VuA-JY-Fuv" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Phq-Ne-KEf"/>
                             <constraint firstItem="Bui-4f-XiL" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="8" id="Syk-27-z6i"/>
+                            <constraint firstItem="VuA-JY-Fuv" firstAttribute="top" secondItem="Bui-4f-XiL" secondAttribute="bottom" id="aRA-ZK-dTM"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Bui-4f-XiL" secondAttribute="trailing" constant="8" id="aaO-pE-fxz"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="PXX-rb-0js" secondAttribute="trailing" id="dwA-np-Hj9"/>
                             <constraint firstItem="PXX-rb-0js" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="g5f-Iv-yUX"/>
-                            <constraint firstItem="Bui-4f-XiL" firstAttribute="top" secondItem="PXX-rb-0js" secondAttribute="bottom" id="nPx-TM-lrT"/>
                             <constraint firstItem="PXX-rb-0js" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="sl5-Yr-PjX"/>
+                            <constraint firstAttribute="bottom" secondItem="VuA-JY-Fuv" secondAttribute="bottom" id="y3w-Q5-fU5"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
@@ -44,7 +63,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="139" y="130"/>
+            <point key="canvasLocation" x="137.68115942028987" y="129.91071428571428"/>
         </scene>
     </scenes>
 </document>
