@@ -29,11 +29,12 @@ class ViewController: UIViewController {
     private var audioPlayer = AVAudioPlayer()
     private let coordinateSpan = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
     private let identifier = "Marker"
-    private var currentLocation: CLLocation! = Constants.PointOfInterest.hotCocoa
+    private let myPositionIdentifier = "My_Position"
+    private var currentLocation = Constants.PointOfInterest.hotCocoa
     private let routeColor = Constants.routeColor
     private let routeLineWidth = Constants.routeLineWidth
     private var recordingOn = true
-    private var currentRouteOverlay: MKPolyline?
+    private var currentRouteOverlay = [MKPolyline]()
     private var route = [CLLocationCoordinate2D](){
         didSet {
             addRoute()
@@ -56,9 +57,10 @@ class ViewController: UIViewController {
             UIView.animate(withDuration: 0.7, animations: {
                 senderButton.tintColor = .clear
             }, completion: { [weak self] _ in
+                guard let self = self else { return }
                 senderButton.tintColor = .red
-                self?.recordingOn = false
-                self?.route = []
+                self.recordingOn = false
+                self.route = [self.currentLocation.coordinate]
             })
         }
     }
@@ -116,19 +118,21 @@ class ViewController: UIViewController {
     
     private func addRoute() {
         print(route)
-        if let currentPolyLine = currentRouteOverlay {
-            mapView.removeOverlay(currentPolyLine)
-        }
-        if route.count < 1 {
+        if route.count < 2 {
+            for currentPolyLine in currentRouteOverlay {
+                mapView.removeOverlay(currentPolyLine)
+            }
+            currentRouteOverlay = []
             return
         }
-        
-        let myPolyLine = MKPolyline(coordinates: route, count: route.count)
+        let n = route.count
+        let area = [route[n - 2], route[n - 1]]
+        let myPolyLine = MKPolyline(coordinates: area, count: area.count)
         mapView.addOverlay(myPolyLine)
-        currentRouteOverlay = myPolyLine
+        currentRouteOverlay.append(myPolyLine)
         
-        let rect = myPolyLine.boundingMapRect
-        mapView.setRegion(MKCoordinateRegion(rect), animated: true)
+//        let rect = myPolyLine.boundingMapRect
+//        mapView.setRegion(MKCoordinateRegion(rect), animated: true)
     }
 }
 
@@ -141,11 +145,11 @@ extension ViewController: LocationServiceDelegate {
             let distanceMoved = currentLocation.distance(from: atLocation)
             print(currentLocation.coordinate, atLocation.coordinate)
             currentLocation =  atLocation
-            if distanceMoved >= Constants.distanceFilter && distanceMoved <= Constants.geofencingRadius / 4 {
+//            if distanceMoved >= Constants.distanceFilter && distanceMoved <= Constants.geofencingRadius / 4 {
                 if recordingOn {
                     route.append(currentLocation.coordinate)
                 }
-            }
+//            }
         }
     }
     
@@ -159,6 +163,7 @@ extension ViewController: LocationServiceDelegate {
 //MARK:- MapView Delegate Methods
 
 extension ViewController: MKMapViewDelegate {
+    
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         guard let annotation = view.annotation as? TriggerPoint else { return }
         positionInfoLabel.text = annotation.title
@@ -166,17 +171,32 @@ extension ViewController: MKMapViewDelegate {
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         
-        guard let annotation = annotation as? TriggerPoint else { return nil }
-        var markerView: MKMarkerAnnotationView
-        if let dequeueView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier) as? MKMarkerAnnotationView {
+        //// annotation markers for point of interests
+        if let annotation = annotation as? TriggerPoint {
+            var markerView: MKMarkerAnnotationView
+            if let dequeueView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier) as? MKMarkerAnnotationView {
+                dequeueView.annotation = annotation
+                markerView = dequeueView
+            } else {
+                markerView = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+                markerView.canShowCallout = true
+                markerView.calloutOffset = CGPoint(x: 0, y: 10)
+                markerView.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
+                markerView.glyphText = String((annotation.title?.prefix(1))!)
+            }
+            return markerView
+        }
+        
+        //// annotation marker for current location
+        var markerView: MKAnnotationView
+        if let dequeueView = mapView.dequeueReusableAnnotationView(withIdentifier: myPositionIdentifier) {
             dequeueView.annotation = annotation
             markerView = dequeueView
         } else {
-            markerView = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+            markerView = MKAnnotationView(annotation: annotation, reuseIdentifier: myPositionIdentifier)
             markerView.canShowCallout = true
             markerView.calloutOffset = CGPoint(x: 0, y: 10)
-            markerView.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
-            markerView.glyphText = String((annotation.title?.prefix(1))!)
+            markerView.image = UIImage(named: "car_icon")
         }
         return markerView
     }

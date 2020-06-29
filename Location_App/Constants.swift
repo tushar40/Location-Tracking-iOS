@@ -12,11 +12,13 @@ import UIKit.UIColor
 
 struct Constants {
     
-    static let distanceFilter = 5.0
+    static let distanceFilter = 15.0
     static let geofencingRadius = 100.0
     static let routeColor = UIColor.blue
     static let routeLineWidth: CGFloat = 5.0
 
+    //MARK:- Points of Interest struct
+    
     struct PointOfInterest {
         static let hotCocoa = CLLocation(latitude: 28.537750, longitude: 77.210376)
         static let hauzKhasMetro = CLLocation(latitude: 28.543735, longitude: 77.206455)

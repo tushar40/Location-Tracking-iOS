@@ -25,19 +25,18 @@ class NotificationService: NSObject {
     //MARK:- Member Methods
     
     func startService() {
-        notificationCenter.requestAuthorization(options: [.alert, .sound]) { granted, error in
-            if granted {
-                print("Granted notification Permission")
-                self.permissionGranted = true
-            } else {
-                print("Didn't grant notification Permission")
-                self.permissionGranted = false
-            }
-        }
+//        notificationCenter.requestAuthorization(options: [.alert, .sound]) { granted, error in
+//            if granted {
+//                print("Granted notification Permission")
+//                self.permissionGranted = true
+//            } else {
+//                print("Didn't grant notification Permission")
+//                self.permissionGranted = false
+//            }
+//        }
     }
     
     func addNotification(radius: Double, region: CLCircularRegion) {
-        if permissionGranted {
             let content = UNMutableNotificationContent()
             content.title = region.identifier
             content.subtitle = "\(region.center.latitude), \(region.center.longitude)"
@@ -47,6 +46,5 @@ class NotificationService: NSObject {
             let trigger = UNLocationNotificationTrigger(region: region, repeats: false)
             let request = UNNotificationRequest(identifier: "\(region.identifier)_notify", content: content, trigger: trigger)
             notificationCenter.add(request, withCompletionHandler: nil)
-        }
     }
 }
